@@ -29,6 +29,7 @@ Obsoletes: rubygem-json
 Obsoletes: rubygem-psych
 Obsoletes: rubygem-rdoc
 Obsoletes: rubygems
+Obsoletes: rubygems-rake
 
 %description
 Ruby is the interpreted scripting language for quick and easy
