@@ -12,11 +12,13 @@ Source0:        ftp://ftp.ruby-lang.org/pub/ruby/ruby-%{rubyver}.tar.gz
 Summary:        An interpreter of object-oriented scripting language
 Group:          Development/Languages
 Provides: ruby(abi) = 2.4
+Provides: ruby(rubygems)
 Provides: ruby-irb
 Provides: ruby-rdoc
 Provides: ruby-libs
 Provides: ruby-devel
 Provides: rubygems
+Provides: rubygems(rake)
 Obsoletes: ruby < %{rubyver}
 Obsoletes: ruby-devel < %{rubyver}
 Obsoletes: ruby-irb < %{rubyver}
