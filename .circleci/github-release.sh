@@ -18,10 +18,10 @@ get_github_release() {
   mv linux-amd64-github-release $HOME/bin/github-release
 }
 
-if ! need_to_release; then
-	echo "$CIRCLE_PROJECT_REPONAME $RUBY_VERSION has already released."
-	exit 0
-fi
+# if ! need_to_release; then
+# 	echo "$CIRCLE_PROJECT_REPONAME $RUBY_VERSION has already released."
+# 	exit 0
+# fi
 
 get_github_release
 cp $CIRCLE_ARTIFACTS/*.rpm .
@@ -33,10 +33,11 @@ cp $CIRCLE_ARTIFACTS/*.rpm .
 $HOME/bin/github-release release \
   --user $CIRCLE_PROJECT_USERNAME \
   --repo $CIRCLE_PROJECT_REPONAME \
-  --tag $RUBY_VERSION \
+  --tag "${RUBY_VERSION}-test" \
   --name "Ruby-${RUBY_VERSION}" \
   --description "not release" \
-  --target master
+  --target test-deploy-job-for-pr106 \
+  --draft
 
 #
 # Upload rpm files and build a release note
@@ -54,7 +55,7 @@ upload_rpm() {
   RPM_FILE=$1
   $HOME/bin/github-release upload --user $CIRCLE_PROJECT_USERNAME \
     --repo $CIRCLE_PROJECT_REPONAME \
-    --tag $RUBY_VERSION \
+    --tag "${RUBY_VERSION}-test" \
     --name "$RPM_FILE" \
     --file $RPM_FILE
 }
@@ -79,6 +80,7 @@ done
 $HOME/bin/github-release edit \
   --user $CIRCLE_PROJECT_USERNAME \
   --repo $CIRCLE_PROJECT_REPONAME \
-  --tag $RUBY_VERSION \
+  --tag "${RUBY_VERSION}-test" \
   --name "Ruby-${RUBY_VERSION}" \
-  --description "$(cat description.md)"
+  --description "$(cat description.md)" \
+  --draft
