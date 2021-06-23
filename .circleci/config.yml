@@ -188,10 +188,6 @@ workflows:
           requires:
             - ruby-<< matrix.version >>-centos7-amd64-build-and-test
             - ruby-<< matrix.version >>-centos7-arm64-build-and-test
-          filters:
-            branches:
-              only:
-                - master
 
   continuous_update:
     triggers:
